@@ -1,0 +1,9 @@
+export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const GET_USER_ADDRESS = 'GET_USER_ADDRESS';
+export const GET_ERRORS_ALLURS = 'GET_ERRORS_ALLURS';
+export const SET_BTC_BALANCE = 'SET_BTC_BALANCE';
+export const SET_ETH_BALANCE = 'SET_ETH_BALANCE';
+export const SET_BTC_ADDRESS = 'SET_BTC_ADDRESS';
+export const SET_ETH_ADDRESS = 'SET_ETH_ADDRESS';
