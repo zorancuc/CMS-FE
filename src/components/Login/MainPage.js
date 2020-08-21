@@ -23,12 +23,6 @@ class MainPage extends Component {
 		this.props.history.push('/register');
 	}
 
-	snacBtnClick() {
-		this.setState({
-			snacModal: !this.state.snacModal
-		});
-	}
-
 	handleInputChange(e) {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -37,7 +31,6 @@ class MainPage extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		console.log("OKOK");
 		console.log(e.target);
 		const user = {
 			email: this.state.email,
@@ -115,35 +108,7 @@ class MainPage extends Component {
 											<div className="borderLine"></div>
 										</div>
 										<div className="col-12">
-											<div className="form-group mt-3">
-												<button
-													type="button"
-													className={classnames("btn", "talkBtn")}
-													data-toggle="modal"
-													data-target="#modalForm1"
-													// onClick={this.kakaoBtnClick}
-												>
-													<a href = "/api/auth/loginKakao" > Log in with Kakao talk </a>
-												</button>
-											</div>
-											{/* <div className="form-group">
-												<button
-													type="button"
-													className="btn snacBtn"
-													data-toggle="modal"
-													data-target="#modalForm2"
-													onClick={this.snacBtnClick}
-												>
-													Log in with SNAC
-												</button>
-											</div> */}
-										</div>
-										<div className="col-12">
-											<div className="borderLine"></div>
-										</div>
-										<div className="col-12">
 											<div className="linksGroup">
-												{/* <a href="#">아이디 / 비밀번호 찾기</a> */}
 												<a href="#" onClick={this.signUpBtnClick}>Sign Up</a>
 											</div>
 										</div>
@@ -152,9 +117,6 @@ class MainPage extends Component {
 								</form>
 							</div>
 						</div>
-					</div>
-					<div className="language">
-						<a href="#"><img src="images/ic_lang.png"/> Language</a>
 					</div>
 				</section>
 			</div>

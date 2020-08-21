@@ -5,7 +5,8 @@ import {
 } from './types';
 
 export const createProposal = (proposal) => dispatch => {
-
+    console.log("Create Proposal");
+    console.log(proposal)
     axios.post('api/proposal/v1/newProposal', proposal)
         .then(res => {
             const {

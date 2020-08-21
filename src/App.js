@@ -9,23 +9,16 @@ import { setCurrentUser, logoutUser } from './actions/authentication';
 import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
-import MyWallet from './components/MyWallet';
-import Address from './components/Address';
-import Exchange from './components/Exchange';
 import CreatePollMarkdown from './components/CreateProposal';
 import { Cookies } from 'react-cookie';
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://192.168.0.3:3001';
-// axios.defaults.baseURL = 'http://localhost:3001';
-// axios.defaults.baseURL = 'http://104.248.144.234:3001/';
+axios.defaults.baseURL = 'http://localhost:3001';
 
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-console.log("START APP");
 var cookies = new Cookies();
 
 console.log(cookies);
@@ -54,15 +47,6 @@ if(localStorage.jwtToken) {
 		window.location.href = '/login'
 	}
 }
-// } else {
-// 	// console.log(axios.defaults.baseURL + '/login');
-// 	if(window.location.href != 'http://localhost:3001/login') {
-// 		localStorage.removeItem('jwtToken');
-// 		setAuthToken(false);
-// 		store.dispatch(setCurrentUser({}));
-// 		window.location.href = '/login'
-// 	}
-// }
 
 class App extends Component {
 	render() {
@@ -71,12 +55,12 @@ class App extends Component {
 				<Router>
 					<div>
 						{/* <Navbar /> */}
-						<Route exact path="/" component={ MyWallet } />
+						<Route exact path="/" component={ CreatePollMarkdown } />
 						<div className="container">
 							<Route exact path="/register" component={ Register } />
 							<Route exact path="/login" component={ Login } />
-							<Route exact path="/mywallet" component={ MyWallet } />
-							<Route exact path="/exchange" component={ Exchange } />
+							{/* <Route exact path="/mywallet" component={ MyWallet } /> */}
+							{/* <Route exact path="/exchange" component={ Exchange } /> */}
 							<Route exact path="/proposal/create" component={ CreatePollMarkdown } />
 						</div>
 					</div>

@@ -10,6 +10,7 @@ import { POLL_DEFAULT_START, URL_REGEX } from '../../utils/constants';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createProposal } from '../../actions/proposal';
+import moment from 'moment';
 
 import ReactMde from 'react-mde';
 import * as Showdown from 'showdown';
@@ -114,6 +115,7 @@ class CreatePollMarkdown extends Component{
     constructor() {
         super();
         this.state = {
+            network: 'mainnet',
             topicKey: '',
             topicTitle: '',
             key: '',
@@ -171,6 +173,7 @@ class CreatePollMarkdown extends Component{
     };
 
     render() {
+        const networkValid = !!this.state.network;
         const topicKeyValid = !!this.state.topicKey;
         const topicTitleValid = !!this.state.topicTitle;
         const keyValid = !!this.state.key;
@@ -186,6 +189,7 @@ class CreatePollMarkdown extends Component{
         // const timeValid = this.state.start >= POLL_DEFAULT_START;
 
         const isValidSubmission =
+            networkValid &&
             topicKeyValid &&
             topicTitleValid &&
             keyValid &&
@@ -199,6 +203,7 @@ class CreatePollMarkdown extends Component{
             // contentValid &&
             // timeValid;
 
+        const networkError = this.state.submitAttempted && !networkValid;
         const topicKeyError = this.state.submitAttempted && !topicKeyValid;
         const topicTitleError = this.state.submitAttempted && !topicTitleValid;
         const keyError = this.state.submitAttempted && !keyValid;
@@ -222,6 +227,15 @@ class CreatePollMarkdown extends Component{
                         and included in the cms
                     </SectionText>
                     {[
+                        {
+                            title: 'Network',
+                            placeholder: 'Network; kovan or mainnet',
+                            value: this.state.network,
+                            onChange: e => this.handlePollState(e, 'network'),
+                            error: topicKeyError,
+                            failureMessage: topicKeyError && 'Network is required',
+                            name: "network"
+                        },
                         {
                             title: 'TopicKey',
                             placeholder: 'This will be the topic key',
@@ -356,7 +370,10 @@ class CreatePollMarkdown extends Component{
                             });
                             if (isValidSubmission) {
                                 console.log("Create");
+                                let moment_date = moment().format("YYYY-MM-DDT00:00:00.000Z");
+                                console.log(moment_date);
                                 this.props.createProposal({
+                                    network: this.state.network,
                                     topicKey: this.state.topicKey,
                                     topicTitle: this.state.topicTitle,
                                     key: this.state.key,
@@ -366,21 +383,24 @@ class CreatePollMarkdown extends Component{
                                     about: this.state.about,
                                     end_approvals: this.state.end_approvals,
                                     end_percentage: this.state.end_percentage,
-                                    date: this.state.date,
+                                    date: moment_date,
                                     documents: this.state.documents,
                                     submitted_by: this.state.submitted_by,
                                     verified: this.state.verified,
                                     govVote: this.state.govVote,
                                     active: this.state.active,
+                                    end_timestamp: 0
+                                    // datePassed: "",
+                                    // dateExecuted: ""
                                 });
                             }
                         }}
                         >
-                            Create Markdown
+                            Create Proposal
                         </Button>
                         <Box width="32px" />
                         <Button variant="secondary" onClick={this.resetPollState}>
-                            Reset Form
+                            Reset
                         </Button>
                     </SectionWrapper>
                 </Fragment>
